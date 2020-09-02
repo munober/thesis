@@ -1,0 +1,15 @@
+*.aux
+*.bcf
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+.DS_Store
+main.synctex(busy)

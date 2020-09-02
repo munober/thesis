@@ -1,0 +1,32 @@
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Dimension & n : 1 & x : 2 & y : 3 & c : 4 \\ \hline
+        \backslashbox{Dataset}{Content} & \begin{tabular}{@{}c@{}}Number of \\ Samples\end{tabular}
+        & X Dimension & Y Dimension & 
+        \begin{tabular}{@{}c@{}}Color \\ Channels\end{tabular} \\ \hline
+        LFW \cite{lfwild_site} & 13,633 & 250 & 250 & 3 \\ \hline
+        Own Dataset 1 (GS) & 200,000 & 32 & 32 & 1 \\ \hline
+        Own Dataset 2 (GS) & 50,000 & 64 & 64 & 1 \\ \hline
+        \textbf{Own Dataset 3 (GS)} & 30,000 & 100 & 100 & 1 \\ \hline
+        Own Dataset 4 (Color) & 15,000 & 48 & 48 & 3 \\ \hline
+    \end{tabular}
+    \caption{Shape of training data arrays for different datasets as represented in memory. For each dataset, we have used almost all of the 4GB of VRAM the graphics card used for training had. The dataset size is proportional to the number of samples and the dimensions of each sample.}
+    \label{tab:numpy_training_shape}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Dimension & n : 1 & x : 2 & y : 3 & c : 4 \\ \hline
+        \backslashbox{Dataset}{Content} & \begin{tabular}{@{}c@{}}Number of \\ Samples\end{tabular}
+        & X Dimension & Y Dimension & 
+        \begin{tabular}{@{}c@{}}Color \\ Channels\end{tabular} \\ \hline
+        Aligned Images \cite{aligned_faces_site} & 621,126 & 340 & 340 & 3 \\ \hline
+        YT Faces \cite{yt_faces_site} & 5,462,875 videos & 1920 & 1080 & 3  \\ \hline
+    \end{tabular}
+    \caption{Other datasets, which the author has identified and experimented with, but not used for training the final model, due to, amongst others, complexity and hardware limitations.}
+    \label{tab:training_shape_others}
+\end{table}

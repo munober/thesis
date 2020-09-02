@@ -1,0 +1,181 @@
+% !BIB TS-program = biber
+% !BIB program = biber
+
+%--------------------
+% Packages
+% -------------------
+% \documentclass[11pt,twoside]{report}
+\documentclass[11pt]{report}
+% \usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[scaled]{helvet}
+\usepackage[T1]{fontenc}
+%\usepackage{gentium}
+% \usepackage{mathptmx} % Use Times Font
+
+
+
+\usepackage{biblatex}
+% \bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{refs} % Entries are in the "refs.bib" file
+
+\usepackage[pdftex]{graphicx} % Required for including pictures
+\usepackage[english]{babel} % translations
+\usepackage[pdftex,linkcolor=black,pdfborder={0 0 0}]{hyperref} % Format links for pdf
+\usepackage{calc} % To reset the counter in the document after title page
+\usepackage{enumitem} % Includes lists
+
+\graphicspath{ {./images/} }
+
+\nonfrenchspacing % No double spacing between sentences
+
+\linespread{1.2} % Set linespace
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+%\usepackage{parskip}
+
+\usepackage[all]{nowidow} % Tries to remove widows
+\usepackage[protrusion=true,expansion=true]{microtype} % Improves typography, load after fontpackage is selected
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\large\sffamily\bfseries}{Chapter \thechapter}{1em}{\Large}
+% \titleformat{\chapter}{\huge\sffamily\bfseries}{Chapter \thechapter.}{1em}{}
+\titleformat{\section}{\large\sffamily\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\sffamily\bfseries}{\thesubsection}{1em}{}
+
+\usepackage{biblatex}
+\usepackage{pgfplots}
+\usepackage{diagbox}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{backgrounds}
+\usepackage[export]{adjustbox}
+\usepackage{array,multirow}
+\usepackage{color, soul}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% \fancyhead[LE,RO]{Chapter \thechapter. \leftmark}
+\fancyhead[L]{\textbf{\sffamily{Chapter \thechapter. \leftmark}}}
+
+% \fancyhead[RE,LO]{\documentnumber~Rev.~\currentrevision}
+% \fancyfoot[CO, RE]{\thepage}
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\chaptermark}[1]{\markboth{{#1}}{}}
+
+
+\usepackage{subfiles}
+
+% \fancyhead{}
+% % \fancyhead[RO,LE]{Chapter \thechapter}
+% % \fancyfoot{}
+% \fancyfoot[LE,RO]{\thepage}
+% % \fancyfoot[LO,CE]{Chapter \thechapter}
+% % \fancyfoot[CO,RE]{Teodor Fratiloiu}
+
+% \makeatletter
+% \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+%                     \thispagestyle{empty}%
+%                     \global\@topnum\z@
+%                     \@afterindentfalse
+%                     \secdef\@chapter\@schapter}
+% \makeatother
+
+%-----------------------
+% Set pdf information and add title, fill in the fields
+%-----------------------
+\hypersetup{ 	
+pdfsubject = {Bachelor's Thesis},
+pdftitle = {TinyFace: Extreme Edge Face Detection on Embedded Devices},
+pdfauthor = {Teodor Fratiloiu}
+}
+
+\newcommand\numRowsK{3}
+\newcommand\numColsK{3}
+\newcommand{\K}[2]{% #1: row, #2: col
+    \edef\Kcol##1##2##3{###2}%
+    \edef\Krow##1##2##3{\noexpand\Kcol###1}%
+    \Krow
+        {1 0 1}
+        {0 1 0}
+        {1 0 1}%
+}
+
+%-----------------------
+% Begin document
+%-----------------------
+% \renewcommand\familydefault{\sfdefault}
+\begin{document} 
+
+\tikzset{%
+  every neuron/.style={
+    circle,
+    draw,
+    minimum size=1cm
+  },
+  neuron missing/.style={
+    draw=none, 
+    scale=4,
+    text height=0.333cm,
+    execute at begin node=\color{black}$\vdots$
+  },
+}
+
+\begin{titlepage}
+    \subfile{cover}
+\end{titlepage}
+\section*{}
+\pagestyle{empty}
+\subfile{declaration}
+
+\newpage
+\pagenumbering{roman}
+\pagestyle{plain}
+\subfile{abstract}
+\tableofcontents
+
+\newpage
+
+\pagestyle{fancy}
+\pagenumbering{arabic}   
+\chapter{Introduction}
+\subfile{chap1}
+
+\chapter{Prerequisites}
+\subfile{chap2}
+
+\chapter{TinyML: Machine Learning on Microcontrollers}
+\subfile{chap3}
+
+\chapter{Machine Learning-Powered Face Detection}
+\subfile{chap4}
+
+\chapter{Implementation}
+\subfile{chap5}
+
+\chapter{Results}
+\subfile{chap6}
+
+\chapter{Conclusion and Future Work}
+\subfile{chap7}
+
+\newpage
+\pagestyle{plain}
+\pagenumbering{roman}
+\subfile{epilogue}
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+\newpage
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+\end{document}

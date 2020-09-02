@@ -1,0 +1,41 @@
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|}
+        \hline 2D-Convolution - Window Size: 1 * 1 \\\hline
+        Activation - ReLU \\\hline
+        \begin{tabular}{c|c}
+        \begin{tabular}{c c}
+            2D-Convolution  &  Window Size: 1 * 1 \\\hline
+            Activation & ReLU \\\hline
+        \end{tabular} & 
+        \begin{tabular}{c c}
+        2D-Convolution & Window Size: 3 * 3 \\\hline
+        Activation & ReLU \\\hline
+        \end{tabular} \\\hline
+        \end{tabular} \\
+        Concatenation \\\hline
+    \end{tabular}
+    \caption{A fire Layer \cite{squeezent_paper}}
+    \label{tab:fire_layer}
+\end{table}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|}
+        \hline \textbf{Layer} \\\hline
+        \hline 2D-Convolution \\\hline
+        Activation  \\\hline
+        2D Max-Pooling \\\hline
+        Fire Layer  \\\hline
+        Fire Layer \\\hline
+        Fire Layer  \\\hline
+        Fire Layer  \\\hline
+        Dropout \\\hline
+        2D-Convolution - Window Size: 1 * 1 \\\hline
+        Activation\\\hline
+        2D Average-Pooling \\\hline
+        Activation \\\hline
+    \end{tabular}
+    \caption{SqueezeNet model architecture \cite{squeezent_paper}}
+    \label{tab:optimized_squeezenet}
+\end{table}
