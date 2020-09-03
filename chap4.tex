@@ -40,13 +40,14 @@ The finally compiled dataset consists of two categories of labelled pictures: fi
 To process the downloaded pictures into a format suitable for face detection, the above presented tool has the ability to, firstly, filter out the faces from the larger downloaded images, than to save those faces as individual pictures, with a border padding that is randomly defined - to help with versatility - then save them, either as color or grayscale pictures, and to a desired dimension. Furthermore, we can define custom padding borders for images, including a randomizer that ensures we always set the face slightly off-center.
 
 \section{Designing a Convolutional Neural Network Model Architecture}
-For the building of a neural network model architecture, several formerly designed models, from literature, were analyzed to determine their fitness for TinyFace. An overview of some of the most prominent examples the author has experimented with, are listed below.
+For the building of a neural network model architecture, several formerly designed models, from literature, were analyzed to determine their fitness for TinyFace. An overview of some of the most prominent examples the author has experimented with, are listed below. Their respective architectures can be found in \textit{Tables \ref{tab:odarknet}} to \textit{\ref{tab:optimized_squeezenet}}.
 \begin{enumerate}
-    \item SqueezeNet \cite{squeezent_paper}
     \item DarkNet \cite{tiny_darknet}
     \item LeNet \cite{lenet_1}
     \item VGG \cite{vgg_paper}
+    \item SqueezeNet \cite{squeezent_paper}
 \end{enumerate}
+
 The author has built a Python-based framework, on which many different combinations of datasets and model architectures were trained and tested, with different hyperparameters. The results of this process will be discussed in Chapter 5. \par
 A more advanced neural network model architecture, developed by Google and available open-source, has also been considered. It is called FaceNet, and it was primarily designed for facial recognition, since it can \textit{very} accurately identify facial features of individuals and tell apart one person from another with over 90\% accuracy after having trained on just 10 pictures of that person. FaceNet therefore is not only capable of face detection, but also advanced one-to-many facial recognition, and this puts it outside the scope of this project, or the performance of embedded hardware in general. \cite{facenetseminal_paper} \par
 As we can see in \textit{Table \ref{tab:model_archs}}, out of the several investigated model architectures, the best TinyFace performance has been achieved by an optimized version of SqueezeNet, the size of which the author has reduced by using TF-Lite quantization and compression.
@@ -60,7 +61,7 @@ For determining the training parameters, the author experimented by gradually in
 \begin{figure}
     \centering
     \includegraphics[height = 10 cm]{images/squeezenet_3epochs.png}
-    \caption{Training the final version of the model. A squeezenet-based model architecture, with 3 epochs of training, and a batch size of 32, plus a custom dataset of 16,000 samples. This trained model run with acceptable accuracy in the webcam demo.}
+    \caption{Training the final version of the model. A squeezenet-based model architecture, with 3 epochs of training, and a batch size of 32, plus a custom dataset of 16,000 samples. This trained model delivers acceptable accuracy in the webcam demo.}
     \label{fig:squeezenet_final_3_epochs}
 \end{figure}
 

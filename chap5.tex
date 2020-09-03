@@ -1,10 +1,30 @@
-We have previously defined \textit{TinyFace} as a face detector application, powered by neural networks, and running in a TensorFlow-Lite interpreter environment, where certain steps have been undertaken to reduce model size and complexity. This chapter will present a working application where this has been made possible.
-\section{The Workflow}
-As previously discussed, there are esentially 4 steps to this: gathering data, experimenting with convolutional neural-network model architectures, training, and evaluating inference performance. With it being an iterative process, it means that after running through all 4 steps, we must go back to step 1 and try to improve our model's performance even more. \par
+We have previously defined \textit{TinyFace} as a face detector application, powered by neural networks, and running in a TensorFlow-Lite interpreter environment, where certain steps have been undertaken to reduce model size and complexity. This chapter will present a working application where this has been made possible. \par
+As previously discussed, there are esentially 4 steps to building \textit{TinyFace}: gathering data, experimenting with convolutional neural-network model architectures, training, and, finally, evaluating inference performance. With it being an iterative process, this means that after running through all 4 steps, we must go back to step 1 and try improving our model's performance even more. \par
+\section{Webscrapper}
+Webscrapper is a Selenium-based automatic web-scraping tool, which can search for, download, pre-process, crop and add padding to, sort, filter and save images where faces are present. We need Webscapper to build datasets for training.
+\section{Compressed Squeezenet}
+\subsection{Goals}
+\subsection{Architecture}
+See \textit{Figure \ref{netron_sqnet}} for a fully expanded description.
 
-\section{TinyFace}
-Let us now present a working implementation of face detection. We have settled on the parameters and configuration presented below after experimenting with several datasets and many different model architectures. 
+\begin{figure}[!tbp]
+\centering
+\subfloat[Top Third]{\includegraphics[height = 20 cm]{images/netron_sqnet_1.png}
+\label{fig:f1}}
+\hfill
+\subfloat[Middle Third]{\includegraphics[height = 20 cm]{images/netron_sqnet_2.png}
+\label{fig:f2}}
+\subfloat[Bottom Third]{\includegraphics[height = 20 cm]{images/netron_sqnet_3.png}
+\label{fig:f3}}
+\caption{Fully expanded vizualization of trained Squeezenet. Note that the image was divided so it would fit on one page. Generated from TF-Lite file by Netron. \cite{netron}}
+\label{netron_sqnet}
+\end{figure}
 
-\subsection{Validation on a PC}
-For quick validation, on the same device where training has been done, a computer application was built. This can save valuable time that would otherwise have been wasted deploying a model to the embedded hardware - especially since most models were far from accurate or small enough from the get-go. This app uses a local model interpreter, which can read \textit{.tflite} files and run inference from these locally. The app can take, as input, both static pictures and live webcam frame capture. It also runs in real-time. This offers very valuable feedback before deployment to the actual edge hardware.
 
+\section{The Model Trainer}
+\subsection{Goals}
+\subsection{Architecture}
+\subsection{Datasets}
+\section{The Webcam App}
+\subsection{Code Structure}
+\subsection{Inference Performance}

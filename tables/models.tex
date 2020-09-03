@@ -1,12 +1,12 @@
 \begin{table}[]
     \centering
-    \begin{tabular}{|c|c|c|c|}
-        \hline Model Architecture & TF-Lite model size & Number of Layers & Accuracy  \\\hline
-        \hline SqueezeNet & 4.8 MB & 31 & 95 \%  \\\hline
-        DarkNet &  4 MB & 26 & 85 \%  \\\hline
-        LeNet & 4 MB & 11 & 70 \%  \\\hline
-        Optimized SqueezeNet & \textbf{139 KB} & 31 & 85 \%  \\\hline
+    \begin{tabular}{|c|c|c|}
+        \hline Model Architecture & TF-Lite model size & Number of Layers  \\\hline
+        \hline SqueezeNet & 4.8 MB & 31 \\\hline
+        DarkNet &  4 MB & 26 \\\hline
+        LeNet & 4 MB & 11 \\\hline
+        Optimized SqueezeNet & \textbf{139 KB} & 31 \\\hline
     \end{tabular}
-    \caption{Comparison of different model architectures in terms of size and accuracy. For accuracy, training has been repeated 3-5 times and averaged out. Please note that the accuracy is achieved on training data, and not in real life, where it will invariably be lower.}
+    \caption{Comparison of different model architectures in terms of size and number of layers.}
     \label{tab:model_archs}
 \end{table}

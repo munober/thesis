@@ -1,6 +1,62 @@
 \begin{table}[]
     \centering
     \begin{tabular}{|c|}
+        \hline \textbf{Layer} \\\hline
+        \hline 2D Convolution \\\hline
+        2D MaxPooling  \\\hline
+        2D Convolution \\\hline
+        2D MaxPooling  \\\hline
+        "Bottleneck Block" \\\hline
+        2D MaxPooling  \\\hline
+        "Bottleneck Block" \\\hline
+        2D MaxPooling  \\\hline
+        "Bottleneck Block" \\\hline
+        2D MaxPooling  \\\hline
+        "Bottleneck Block" \\\hline
+        2D Convolution \\\hline
+    \end{tabular}
+    \quad
+    \begin{tabular}{|c|}
+        \hline \textbf{Layer} \\\hline
+        \hline 2D Convolution \\\hline
+        2D Convolution \\\hline
+        2D Convolution  \\\hline
+        ReLU \\\hline
+        2D MaxPooling  \\\hline
+        2D Convolution \\\hline
+        ReLU  \\\hline
+        2D MaxPooling  \\\hline
+        Dense Layer \\\hline
+        ReLU \\\hline
+        Dense Layer \\\hline
+        Softmax \\\hline
+    \end{tabular}
+    \quad
+    \begin{tabular}{|c|}
+        \hline \textbf{Layer} \\\hline
+        \hline 2D Convolution \\\hline
+        2D Convolution \\\hline
+        2D Max-Pooling \\\hline
+        Dropout \\\hline
+        2D Convolution \\\hline
+        2D Convolution \\\hline
+        2D Max-Pooling \\\hline
+        Dropout \\\hline
+        2D Convolution \\\hline
+        2D Convolution \\\hline
+        2D Max-Pooling \\\hline
+        Dropout \\\hline
+        Dense Layer \\\hline
+        Dropout \\\hline
+        Dense Layer \\\hline
+    \end{tabular}
+    \caption{DarkNet, LeNet and VGG model architectures}
+    \label{tab:odarknet}
+\end{table}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|}
         \hline 2D-Convolution - Window Size: 1 * 1 \\\hline
         Activation - ReLU \\\hline
         \begin{tabular}{c|c}
@@ -15,7 +71,7 @@
         \end{tabular} \\
         Concatenation \\\hline
     \end{tabular}
-    \caption{A fire Layer \cite{squeezent_paper}}
+    \caption{A Fire Layer \cite{squeezent_paper}}
     \label{tab:fire_layer}
 \end{table}
 
@@ -39,3 +95,4 @@
     \caption{SqueezeNet model architecture \cite{squeezent_paper}}
     \label{tab:optimized_squeezenet}
 \end{table}
+
