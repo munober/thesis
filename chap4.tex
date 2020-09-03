@@ -21,12 +21,23 @@ Finally, let us look into SVM's, which are a more sophisticated category of Mach
 \section{Face Detection with Convolutional Neural Network Classifiers}
 To understand how face detection with convolutional neural networks works, we need to firstly define \textit{binary classifiers}. Binary classification is the process of assigning one of several different classes to an object, according to a set of rules. In order to find these rules, a neural network needs \textit{labelled} training data, from which it can extract features, and then \textit{learn} which family of objects those attributes belong to. As such, we can formulate the problem of facial detection with convolutional neural networks as a 4-step procedure.
 \begin{enumerate}
-    \item Designing a model architecture
     \item Compiling training data
+    \item Designing a model architecture
     \item Training a classifier, compression and optimization
     \item Performing inference
 \end{enumerate}
-The first 3 steps will be executed \textit{a priori}, on a separate, more powerful computer. The final step requires us to use an embedded, edge device. We will address the first 3 steps in this chapter, and the final step in chapters 5 and 6. 
+The first 3 steps will be executed \textit{a priori}, on a separate, more powerful computer. The final step can be performed in an interpreter, or, if required, the model could also be deployed directly to an embedded device.
+
+\section{Gathering Data for Training Neural Networks}
+As we have repeatedly seen, gathering relevant and properly selected data for training and validation, which presents high \textit{statistical variance}, is of paramount importance to achieving high accuracy for our final model, when performing inference on real-world data.  In the following sub-sections, we will discuss an end-to-end approach for compiling datasets of images of actors' faces, filtering the data, pre-processing the images to the desired dimension and color channels, and finally exporting them into a format that is appropriate for model training.
+\subsection{Compiling a Dataset}
+Dataset generation is a task that is often best accomplished with automation. Having resolved to also generate our own data for training, a Python scripted tool for web-scraping and image processing was built. \par
+In essence, the tool can search Google and IMDb by actor names, compile a list of links of images of the actors by using Selenium \cite{selenium_website} and BeautifulSoup, then download and save the images from those links. Afterwards, the tool automatically detects the faces in those images with OpenCV, crops them out with a \textit{randomized} padding border to increase variance of background, then saves those faces to the desired output shape given by the user. It can save the images as either 8-bit RGB or grayscale. \par
+Using this tool, several training datasets were compiled, and the above named models were trained using this training data.\par
+The finally compiled dataset consists of two categories of labelled pictures: firstly, images of faces, then, secondly, images of random backgrounds extracted from pictures, which are used as so-called \textit{negatives}. The reason we need this second class of pictures is because a binary classification tool needs, as its name suggests, exactly two classes to fit objects into.
+\subfile{tables/datasets}
+\subsection{Image data processing}
+To process the downloaded pictures into a format suitable for face detection, the above presented tool has the ability to, firstly, filter out the faces from the larger downloaded images, than to save those faces as individual pictures, with a border padding that is randomly defined - to help with versatility - then save them, either as color or grayscale pictures, and to a desired dimension. Furthermore, we can define custom padding borders for images, including a randomizer that ensures we always set the face slightly off-center.
 
 \section{Designing a Convolutional Neural Network Model Architecture}
 For the building of a neural network model architecture, several formerly designed models, from literature, were analyzed to determine their fitness for TinyFace. An overview of some of the most prominent examples the author has experimented with, are listed below.
@@ -41,16 +52,17 @@ A more advanced neural network model architecture, developed by Google and avail
 As we can see in \textit{Table \ref{tab:model_archs}}, out of the several investigated model architectures, the best TinyFace performance has been achieved by an optimized version of SqueezeNet, the size of which the author has reduced by using TF-Lite quantization and compression.
 \subfile{tables/models}
 
-\section{Gathering Data for Training Neural Networks}
-As we have repeatedly seen, gathering relevant and properly selected data for training and validation, which presents high \textit{statistical variance}, is of paramount importance to achieving high accuracy for our final model, when performing inference on real-world data.  In the following sub-sections, we will discuss an end-to-end approach for compiling datasets of images of actors' faces, filtering the data, pre-processing the images to the desired dimension and color channels, and finally exporting them into a format that is appropriate for model training.
-\subsection{Compiling a Dataset}
-Dataset generation is a task that is often best accomplished with automation. Having resolved to also generate our own data for training, a Python scripted tool for web-scraping and image processing was built. \par
-In essence, the tool can search Google and IMDb by actor names, compile a list of links of images of the actors by using Selenium \cite{selenium_website} and BeautifulSoup, then download and save the images from those links. Afterwards, the tool automatically detects the faces in those images with OpenCV, crops them out with a \textit{randomized} padding border to increase variance of background, then saves those faces to the desired output shape given by the user. It can save the images as either 8-bit RGB or grayscale. \par
-Using this tool, several training datasets were compiled, and the above named models were trained using this training data.\par
-The finally compiled dataset consists of two categories of labelled pictures: firstly, images of faces, then, secondly, images of random backgrounds extracted from pictures, which are used as so-called \textit{negatives}. The reason we need this second class of pictures is because a binary classification tool needs, as its name suggests, exactly two classes to fit objects into.
-\subfile{tables/datasets}
-\subsection{Image data processing}
-To process the downloaded pictures into a format suitable for face detection, the above presented tool has the ability to, firstly, filter out the faces from the larger downloaded images, than to save those faces as individual pictures, with a border padding that is randomly defined - to help with versatility - then save them, either as color or grayscale pictures, and to a desired dimension. Furthermore, we can define custom padding borders for images, including a randomizer that ensures we always set the face slightly off-center.
+\subsection{A Model Architecture That Stands Apart}
+The used neural network model is based on the \textit{SqueezeNet} architecture. SqueezeNet - which is a classification neural network - manages to achieve very small model sizes, because it uses \textit{concatenations} to merge layers. As such, the network is a sequence of convolutional and pooling layers, plus what its authors call \textit{fire modules} or layers, which use the above named convolutions. An overview of one fire layer can be seen in \textit{Table \ref{tab:fire_layer}}, and the complete architecture of the neural network can be seen in \textit{Table \ref{tab:optimized_squeezenet}}. \par
+\subfile{figures/squeezenet}
+Other models that the author has experimented with are VGG-3, LeNet and DarkNet, which were presented in the previous chapter. However, the size of these could not be reduced enough to make them fit on the embedded device. \par 
+For determining the training parameters, the author experimented by gradually increasing the dimensions and definition of training data until either the performance started decreasing or the computer ran out of memory. For instance, trying to train with anything more than 50,000 color images with sides larger than 100 pixels, could not fit inside the video memory of the used graphics card, and resulted in an error.
+\begin{figure}
+    \centering
+    \includegraphics[height = 10 cm]{images/squeezenet_3epochs.png}
+    \caption{Training the final version of the model. A squeezenet-based model architecture, with 3 epochs of training, and a batch size of 32, plus a custom dataset of 16,000 samples. This trained model run with acceptable accuracy in the webcam demo.}
+    \label{fig:squeezenet_final_3_epochs}
+\end{figure}
 
 \section{Training the Model}
 Having now seen how a dataset can be compiled, let us look into what training could be like. 
