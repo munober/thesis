@@ -1,8 +1,11 @@
 We have previously defined \textit{TinyFace} as a face detector application, powered by neural networks, and running in a TensorFlow-Lite interpreter environment, where certain steps have been undertaken to reduce model size and complexity. This chapter will present a working application where this has been made possible. \par
 As previously discussed, there are esentially 4 steps to building \textit{TinyFace}: gathering data, experimenting with convolutional neural-network model architectures, training, and, finally, evaluating inference performance. With it being an iterative process, this means that after running through all 4 steps, we must go back to step 1 and try improving our model's performance even more. \par
+
 \section{Webscrapper}
 \subfile{tables/datasets_2}
-Webscrapper is a Selenium-based automatic web-scraping tool, which can search for, download, pre-process, crop and add custom or random side-paddings, sort and categorize, filter and save images where faces are present. We need Webscapper to build datasets for training, but we will not go into more detail about it. Some examples of custom-generated datasets that were used by the author during training, as well as the shape of their contents can be seen in \textit{Table \ref{tab:numpy_training_shape}}. The best performance was achieved using \textit{Own Dataset 3}.
+Webscrapper is a Selenium-based automatic web-scraping tool, which can search for, download, pre-process, crop and add custom or random side-paddings, sort and categorize, filter and save images where faces are present. We need Webscapper to build datasets for training, but we will not go into more detail about it. Some examples of custom-generated datasets that were used by the author during training, as well as the shape of their contents can be seen in \textit{Table \ref{tab:numpy_training_shape}}. The best performance was achieved using \textit{Own Dataset 3}. \par
+Another aspect that has impacted the accuracy of the trained model was the amount of padding (background left intact around the face) and the place where it was applied (i.e. if the images were centered relative to the face or if they had been intentionally skewed to one side). In \textit{Table \ref{tab:numpy_training_padding}} we can see several different datasets of size 30,000 with side dimensions of 100*100, and the amount of (randomized - i.e. not equal on the two different sides, but randomly distributed and intentionally made uneven) padding aroud the image. This skewed padding gives us more realistic images.
+
 \section{Compressed Squeezenet}
 \subsection{Goals}
 Having resolved to formalize the training and evaluation of models, several Python scripts have been written to automate this task. Thus, we firstly needed to write up all the identified model candidates in TensorFlow, in order to be able to call them up for training. This was done for all 4 models from the previous chapter. After training and evaluating performance, the best accuracy and also the smallest size were achieved by Squeezenet.
@@ -18,7 +21,7 @@ We have settled on a modified Squeezenet-type model architecture. In \textit{Fig
 \label{fig:f2}}
 \subfloat[Bottom Third]{\includegraphics[height = 20 cm]{images/netron_sqnet_3.png}
 \label{fig:f3}}
-\caption{Fully expanded vizualization of trained Squeezenet. Note that the image was divided so it would fit on one page. Generated from TF-Lite file by Netron. \cite{netron}}
+\caption{Expanded view of trained and quantized Squeezenet. Note that the image was divided so it would fit on one page. Generated from TF-Lite file by Netron. \cite{netron}}
 \label{netron_sqnet}
 \end{figure}
 

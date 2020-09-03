@@ -14,3 +14,16 @@
     \caption{For each dataset, we have used almost all of the 4GB of VRAM the graphics card used for training had. The dataset size is proportional to the number of samples and the dimensions of each sample.}
     \label{tab:numpy_training_shape}
 \end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Dataset & Amount of Padding & Accuracy  \\ \hline
+        1 & 20 \% & 70 \%  \\ \hline
+        2 & 50 \% & 70 \%  \\ \hline
+        3 & 80 \% & 70 \%  \\ \hline
+    \end{tabular}
+    \caption{Padding was applied as a percentage, divided randomly and unevenly between the left/right and up/down side pairs respectively. All datasets had 30,000 grayscale images with sides of 100*100.}
+    \label{tab:numpy_training_padding}
+\end{table}
