@@ -1,0 +1,16 @@
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Dimension & n : 1 & x : 2 & y : 3 & c : 4 \\ \hline
+        \backslashbox{Dataset}{Content} & \begin{tabular}{@{}c@{}}Number of \\ Samples\end{tabular}
+        & X Dimension & Y Dimension & 
+        \begin{tabular}{@{}c@{}}Color \\ Channels\end{tabular} \\ \hline
+        Own Dataset 1 (GS) & 200,000 & 32 & 32 & 1 \\ \hline
+        Own Dataset 2 (GS) & 50,000 & 64 & 64 & 1 \\ \hline
+        \textbf{Own Dataset 3 (GS)} & 30,000 & 100 & 100 & 1 \\ \hline
+        Own Dataset 4 (Color) & 15,000 & 48 & 48 & 3 \\ \hline
+    \end{tabular}
+    \caption{For each dataset, we have used almost all of the 4GB of VRAM the graphics card used for training had. The dataset size is proportional to the number of samples and the dimensions of each sample.}
+    \label{tab:numpy_training_shape}
+\end{table}

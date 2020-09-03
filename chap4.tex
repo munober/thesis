@@ -68,8 +68,8 @@ For determining the training parameters, the author experimented by gradually in
 \section{Training the Model}
 Having now seen how a dataset can be compiled, let us look into what training could be like. 
 \subsection{Discussing Datasets}
-We start off with \textit{numpy} arrays of data. These are usually represented as having 4 dimensions in memory, and, therefore, a shape of \textit{n:x:y:c}. Some examples of datasets that were used by the author during training, as well as the shape of their contents can be seen in \textit{Table \ref{tab:numpy_training_shape}}. The best performance was achieved using \textit{Own Dataset 3}. A number 3 for Color Channels represents RGB images, a 1 represents grayscale images. For each color channel, we then have a \textit{0-255} value, representing its respective color as an 8-bit number. We can calculate the total, uncompressed, size of the training data array by multiplying the numbers on every row. \par
-Having these rough representations for dataset size, let us now look at actually using this training data.
+We start off with \textit{numpy} arrays of data. These are usually represented as having 4 dimensions in memory, and, therefore, a shape of \textit{n:x:y:c}. A number 3 for Color Channels represents RGB images, a 1 represents grayscale images. For each color channel, we then have a \textit{0-255} value, representing its respective color as an 8-bit number. We can calculate the total, uncompressed, size of the training data array by multiplying the numbers on every row. \par
+Having these rough representations for dataset size, let us now look at how we can actually use this training data.
 \subfile{figures/sqnet_tr}
 
 \subsection{Tuning Hyperparameters}
