@@ -6,13 +6,12 @@ As previously discussed, there are esentially 4 steps to building \textit{TinyFa
 Webscrapper is a Selenium-based automatic web-scraping tool, which can search for, download, pre-process, crop and add custom or random side-paddings, sort and categorize, filter and save images where faces are present. We need Webscapper to build datasets for training, but we will not go into more detail about it. Some examples of custom-generated datasets that were used by the author during training, as well as the shape of their contents can be seen in \textit{Table \ref{tab:numpy_training_shape}}. The best performance was achieved using \textit{Own Dataset 3}. \par
 Another aspect that has impacted the accuracy of the trained model was the amount of padding (background left intact around the face) and the place where it was applied (i.e. if the images were centered relative to the face or if they had been intentionally skewed to one side). In \textit{Table \ref{tab:numpy_training_padding}} we can see several different datasets of size 30,000 with side dimensions of 100*100, and the amount of (randomized - i.e. not equal on the two different sides, but randomly distributed and intentionally made uneven) padding aroud the image. This skewed padding gives us more realistic images.
 \begin{figure*}[ht!]
-    \includegraphics[width = 2 cm]{images/leo/3c5d0190660}\hfill
-    \includegraphics[width = 2 cm]{images/leo/3e3f6a53350}\hfill
-    \includegraphics[width = 2 cm]{images/leo/3e3f6a53350}\hfill
-    \includegraphics[width = 2 cm]{images/leo/3f4b0e0c760}\hfill
-    \includegraphics[width = 2 cm]{images/leo/4b605e33360}\hfill
-    \includegraphics[width = 2 cm]{images/leo/24eb14f9da0}\hfill
-    \includegraphics[width = 2 cm]{images/leo/188d3b34ff1}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/3c5d0190660}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/3e3f6a53350}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/3f4b0e0c760}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/4b605e33360}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/24eb14f9da0}\hfill
+    \includegraphics[width = 2.4 cm]{images/leo/188d3b34ff1}\hfill
     \caption{Training images with randomized side paddings}
 \end{figure*}
 
