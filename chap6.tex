@@ -15,9 +15,20 @@ After repeatedly experimenting with different numbers and combinations for each 
     \item a 75\%-25\% divide between training and test data
     \item a dropout rate of 10\%
 \end{itemize}
-The choice of hyperparameters and the evaluation of training performance is a lengthy process, and a relatively big time drain, in general, plus highly repetitive. That makes it a prime candidate for automation. A solution for this will be proposed in the next chapter.
+The choice of hyperparameters and the evaluation of training performance is a lengthy process, and a relatively big time drain, in general, plus highly repetitive. That makes it a prime candidate for automation. A solution for this will be proposed in the next chapter. In \textit{Figure \ref{training_tf_gold}}, we can see the training accuracy of the model, as reported by TensorFlow. We have achieved 99\% accuracy several times on the training data, which means that our model really is a good fit for learning images. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 16 cm]{figures/training_fig1}
+    \includegraphics[width = 16 cm]{figures/training_fig2}
+    \caption{Training with 5 epochs, for 5 different runs. During run number 4, the model failed to learn the data, and averaged out at a reported 61\%.}
+    \label{training_tf_gold}
+\end{figure}
+
+\newpage
 \section{Example Inference}
 Let us look at 5 representative images of the author, that the interpreter has been called upon. We have 3 figures. In \textit{Figure \ref{webcam_orig}}, we can see the original images, as they appear to us in the \textit{live-view} of the webcam. In \textit{Figure \ref{interpreter_eyes}}, we can see what the converted images look like \textit{in the eyes of the interpreter}. In \textit{Table \ref{tab:results}}, we can see what the interpreter has determined for each image. \par
+For the first image, we have a clear answer: a face. For the second image, probably because of the tilted head, we have a not-so-clear 48-51 divide between face and non-face. The third image, where even glasses are present, is a clear \textit{face}. The fourth image, where the webcam was partially covered, is a non-face object. The same is true for the last image, where the webcam has, once again, been intentionally covered.
 
 \begin{figure*}[ht!]
     \includegraphics[width = 2.8 cm]{images/inference/61_38}\hfill
@@ -54,23 +65,30 @@ Let us look at 5 representative images of the author, that the interpreter has b
     \label{tab:results}
 \end{table}
 
-For the first image, we have a clear answer: a face. For the second image, probably because of the tilted head, we have a not-so-clear 48-51 divide between face and non-face. The third image, where even glasses are present, is a clear \textit{face}. The fourth image, where the webcam was partially covered, is a non-face object. The same is true for the last image, where the webcam has, once again, been intentionally covered.
-
+\newpage
 \section{A Longer Test}
-We have also run inference for longer periods, with the faces of several people, and achieved the following results, presented in \textit{Table \ref{tab:inference_long_term}}. These other faces will not be included, since they are not the author's own.
+We have also run inference for longer periods, with the faces of several people, and achieved the following results, presented in \textit{Figure \ref{fig:long_inference} and Table \ref{tab:inference_long_term}}. These other faces will not be included, since they are not the author's own. We can see that the inference was \textit{relatively} accurate in our empirical tests: often around 80\%, and this in 4 different scenarios, with 3 different people. 
 
+\begin{figure}
+    \centering
+    \includegraphics[height = 7 cm]{figures/inference_long_test}
+    \caption{Results of another accuracy test for inference: how many of 20 images were correctly identified.}
+    \label{fig:long_inference}
+    \quad
+\end{figure}
 \begin{table}
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|}
         \hline
-        Person & Clear Face & Glasses/Hat & Covered Camera  \\ \hline
-        1 & 75 \% & 70 \% & 80\% \\ \hline
-        2 & 85 \% & 65 \% & 80\% \\ \hline
-        3 & 80 \% & 75 \% & 80\% \\ \hline
+        Person & Clear Face & Glasses/Hat & Partially Covered Camera & Fully Covered Camera  \\ \hline
+        1 & 75 \% & 70 \% & 80\% & 90 \% \\ \hline
+        2 & 85 \% & 65 \% & 80\% & 90 \% \\ \hline
+        3 & 80 \% & 75 \% & 80\% & 90 \% \\ \hline
     \end{tabular}
-    \caption{Results of a longer test for inference: how many of 20 images were correctly identified.}
+    \caption{Results from above, transcribed.}
     \label{tab:inference_long_term}
 \end{table}
 
 \section{Discussing the Results}
-Let us, therefore, close this chapter by looking back at what has been achieved. We have so far presented a complete, end-to-end, process for running face detection in a TensorFlow Lite interpreter. We started out with compiling our own dataset and developing our own model architecture, then optimized size and performance, deployed to the interpreter, and evaluated performance. As such, we have created a new application of \textit{TinyML}, that we have called \textit{TinyFace}. With this in mind, and having now accomplished what we set out to do, let us close this chapter and proceed to the final one, where we will present possible future research directions, and deliver our closing remarks.
+Let us, therefore, close this chapter by looking back at what has been achieved. We have so far presented a complete, end-to-end, process for running face detection in a TensorFlow Lite interpreter. We started out with compiling our own dataset and developing our own model architecture, then optimized size and performance, deployed to the interpreter, and evaluated performance. As such, we have created a new application of \textit{TinyML}, that we have called \textit{TinyFace}. We have achieved an accuracy level of around 80 \% or more in our empirical test, which is to be expected for models of such size on real-life benchmarks. Moreover, let us not forget that systems designers of such systems would often implement several extra safeguards at higher abstraction levels, higher up in the system, to compensate for the crude accuracy of our almost metal-level implementation of Machine Learning. \par
+With this in mind, and having now accomplished what we set out to do, let us close this chapter and proceed to the final one, where we will present possible future research directions, and deliver our closing remarks.
