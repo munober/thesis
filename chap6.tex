@@ -1,5 +1,5 @@
 % \chapter{Discussion} % maybe the part with automatic optimization
-In the previous chapters, we have looked in broader terms at the problems we are faced with when trying to make \textit{TinyFace} a reality. In this chapter, we will look into the combination of decisions and parameter choices that have enabled us to accomplish our goal.
+In the previous chapters, we have looked in broader terms at the problems we are faced with when trying to make \textit{TinyFace} a reality. In this chapter, we will look into the combination of decisions and parameter choices that have enabled us to accomplish our goal - the end to end development of a dataset generator, model training framework and \textit{TF Lite} interpreter app.
 
 \section{The Final Dataset}
 The model has then been trained on a custom generated dataset, containing data that has been scraped from the web, on a total of 30,000 images - 14,000 faces and 16,000 non-face objects - as such we have a binary classifier. Each image is \textit{100 * 100} pixels large and grayscale. Moreover, each image has been contrast-normalized to a range of 0 to 10, to minimize contrast variance, which would have otherwise been seriously impeding the model's performance during real-world use if left as it had been by default in the images (0-255). A side effect of this, it should be noted, is that the resulting training images look \textit{pitch black} to the naked eye, and we can barely make out any details if at all since there is so little detail left for the human eye to pick up on. However, it is - in this case - advantageous to have so little dynamic range, since the neural network can use its resources to learn the actual geometric shapes and patterns of the faces, instead of wasting valuable memory on learning less-relevant contrast differences (for instance, a soft shadow to the side of one's nose) or, in other words, learning \textit{shades of gray} unnecessarily. \par
@@ -16,5 +16,61 @@ After repeatedly experimenting with different numbers and combinations for each 
     \item a dropout rate of 10\%
 \end{itemize}
 The choice of hyperparameters and the evaluation of training performance is a lengthy process, and a relatively big time drain, in general, plus highly repetitive. That makes it a prime candidate for automation. A solution for this will be proposed in the next chapter.
+\section{Example Inference}
+Let us look at 5 representative images of the author, that the interpreter has been called upon. We have 3 figures. In \textit{Figure \ref{webcam_orig}}, we can see the original images, as they appear to us in the \textit{live-view} of the webcam. In \textit{Figure \ref{interpreter_eyes}}, we can see what the converted images look like \textit{in the eyes of the interpreter}. In \textit{Table \ref{tab:results}}, we can see what the interpreter has determined for each image. \par
+
+\begin{figure*}[ht!]
+    \includegraphics[width = 2.8 cm]{images/inference/61_38}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/48_51}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/63_35}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/41_58}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/37_62}\hfill
+    \caption{Original images, as seen on webcam (cropped by hand to similar size for the sake of comparison with the images in the following figure)}
+    \label{webcam_orig}
+\end{figure*}
+
+\begin{figure*}[ht!]
+    \includegraphics[width = 2.8 cm]{images/inference/frame_0}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/frame_1}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/frame_3}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/frame_4}\hfill
+    \includegraphics[width = 2.8 cm]{images/inference/frame_5}\hfill
+    \caption{What the interpreter actually \textit{"sees"}. The images have sides of 100*100 pixels, their dynamic range has been downsampled to a value between 0 and 9 grayscale.}
+    \label{interpreter_eyes}
+\end{figure*}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Image & \% confidence Face & \% confidence Non-Face  & Result \\ \hline
+        1 & 61 \% & 38 \%  & Face \\ \hline
+        2 & 48 \% & 51 \%  & No Face (it's a tie, almost)\\ \hline
+        3 & 63 \% & 35 \%  & Face \\ \hline
+        4 & 41 \% & 58 \%  & No Face \\ \hline
+        5 & 37 \% & 62 \%  & No Face \\ \hline
+    \end{tabular}
+    \caption{Results of inference when the interpreter was called on the example images.}
+    \label{tab:results}
+\end{table}
+
+For the first image, we have a clear answer: a face. For the second image, probably because of the tilted head, we have a not-so-clear 48-51 divide between face and non-face. The third image, where even glasses are present, is a clear \textit{face}. The fourth image, where the webcam was partially covered, is a non-face object. The same is true for the last image, where the webcam has, once again, been intentionally covered.
+
+\section{A Longer Test}
+We have also run inference for longer periods, with the faces of several people, and achieved the following results, presented in \textit{Table \ref{tab:inference_long_term}}. These other faces will not be included, since they are not the author's own.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Person & Clear Face & Glasses/Hat & Covered Camera  \\ \hline
+        1 & 75 \% & 70 \% & 80\% \\ \hline
+        2 & 85 \% & 65 \% & 80\% \\ \hline
+        3 & 80 \% & 75 \% & 80\% \\ \hline
+    \end{tabular}
+    \caption{Results of a longer test for inference: how many of 20 images were correctly identified.}
+    \label{tab:inference_long_term}
+\end{table}
+
 \section{Discussing the Results}
 Let us, therefore, close this chapter by looking back at what has been achieved. We have so far presented a complete, end-to-end, process for running face detection in a TensorFlow Lite interpreter. We started out with compiling our own dataset and developing our own model architecture, then optimized size and performance, deployed to the interpreter, and evaluated performance. As such, we have created a new application of \textit{TinyML}, that we have called \textit{TinyFace}. With this in mind, and having now accomplished what we set out to do, let us close this chapter and proceed to the final one, where we will present possible future research directions, and deliver our closing remarks.
