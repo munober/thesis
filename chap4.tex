@@ -39,6 +39,7 @@ The finally compiled dataset consists of two categories of labeled pictures: fir
 \subsection{Image data processing}
 To process the downloaded pictures into a format suitable for face detection, the above presented tool has the ability to, firstly, filter out the faces from the larger downloaded images, than to save those faces as individual pictures, with a border padding that is randomly defined - to help with versatility - then save them, either as color or grayscale pictures and to a desired dimension. Furthermore, we can define custom padding borders for images, including a randomizer that ensures we always set the face slightly off-center.
 
+\newpage
 \section{Designing a Convolutional Neural Network Model Architecture}
 For the building of a neural network model architecture, several formerly designed models, from literature, were analyzed to determine their fitness for TinyFace. An overview of some of the most prominent examples the author has experimented with, are listed below. Their respective architectures can be found in \textit{Tables \ref{tab:odarknet}} to \textit{\ref{tab:optimized_squeezenet}}.
 \begin{enumerate}
@@ -53,6 +54,7 @@ A more advanced neural network model architecture, developed by Google and avail
 As we can see in \textit{Table \ref{tab:model_archs}}, out of the several investigated model architectures, the best TinyFace performance has been achieved by an optimized version of SqueezeNet, the size of which the author has reduced by using TF-Lite quantization and compression.
 \subfile{tables/models}
 
+\newpage
 \subsection{A Model Architecture That Stands Apart}
 The used neural network model is based on the \textit{SqueezeNet} architecture. SqueezeNet - which is a classification neural network - manages to achieve very small model sizes, because it uses \textit{concatenations} to merge layers. As such, the network is a sequence of convolutional and pooling layers, plus what its authors call \textit{fire modules} or layers, which use the above named convolutions. An overview of one fire layer can be seen in \textit{Table \ref{tab:fire_layer}}, and the complete architecture of the neural network can be seen in \textit{Table \ref{tab:optimized_squeezenet}}. \par
 \subfile{figures/squeezenet}
@@ -78,5 +80,6 @@ We have empirically determined that, in order to avoid over- and underfitting, a
 Examples of the training process of a SqueezeNet-class model can be be seen in \textit{Figure \ref{fig:squeezenet_30ep_10bat_lfw_full}} - a full size model and \textit{Figure \ref{fig:squeezenet_30ep_10bat_lfw_tfl}}, in which our model is being quantized and compressed during training.
 
 \section{Inference and Performance Evaluation}
-For testing the performance of the compiled and trained models, we are using a Python-based TensorFlow Lite model interpreter, which we are feeding images as inputs, to perform inference on. It parses the image arrays through the weights tensor, and outputs confidence percentages as to whether the objects in the images belong to certain classes. The model interpreter can take input images from 2 sources: either from image files, or directly grab frames from the webcam. This application can run on any system which has Python installed and can very quickly help us validate the real-world performance of a model. It will be presented in more detail in Chapter 5. \par
+For testing the performance of the compiled and trained models, we are using a Python-based TensorFlow Lite model interpreter, which we are feeding images as inputs, to perform inference on. It parses the image arrays through the weights tensor, and outputs confidence percentages as to whether the objects in the images belong to certain classes. The model interpreter can take input images from 2 sources: either from image files, or directly grab frames from the webcam. This application can run on any system which has Python installed and can very quickly help us validate the real-world performance of a model. It will be presented in more detail in Chapter 5. 
+\newpage
 Having looked into face detection, from both a historical, pre-Convolutional Neural Network, perspective, as well as at modern CNN-powered technologies, and having the knowledge to train, compile and evaluate Neural Network models, then to translate full-size tensors into compressed, embedded-sized, packages, we can now finally enter the next chapter: the implementation of \textit{TinyFace}.

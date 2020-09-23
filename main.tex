@@ -104,11 +104,20 @@ pdfauthor = {Teodor Fratiloiu}
         {1 0 1}%
 }
 
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
 %-----------------------
 % Begin document
 %-----------------------
 % \renewcommand\familydefault{\sfdefault}
 \begin{document} 
+\afterpage{\blankpage}
 
 \tikzset{%
   every neuron/.style={
@@ -127,14 +136,18 @@ pdfauthor = {Teodor Fratiloiu}
 \begin{titlepage}
     \subfile{cover}
 \end{titlepage}
+\subfile{first_page}
+\afterpage{\blankpage}
 \section*{}
 \pagestyle{empty}
 \subfile{declaration}
+\afterpage{\blankpage}
 
 \newpage
 \pagenumbering{roman}
 \pagestyle{plain}
 \subfile{abstract}
+\afterpage{\blankpage}
 \tableofcontents
 
 \newpage
@@ -166,6 +179,10 @@ pdfauthor = {Teodor Fratiloiu}
 \pagestyle{plain}
 \pagenumbering{roman}
 \subfile{epilogue}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 \newpage
 \addcontentsline{toc}{chapter}{List of Figures}
@@ -175,7 +192,43 @@ pdfauthor = {Teodor Fratiloiu}
 \listoftables
 
 \newpage
+% \thispagestyle{empty}
+\mbox{}
+\newpage
+\newpage
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
+
+\newpage
+% \thispagestyle{empty}
+\mbox{}
+\newpage
+
+\newpage
+\section*{About the Author}
+Teodor "Teo" Fratiloiu was born in 1999 in Bucharest. His personal website is at \href{fratiloiu.com}{fratiloiu.com}. He posts random weird ramblings out there every now and then. 
+\par
+The reason this page exists is because the booklet needed to be at least 30 double pages \textit{thicc} to get this priting style. Lesson learned: concise writing can actually be frowned upon sometimes. Sending love to all of y'all 3 OG's that are ever gonna read this. Peace.
+
+\newpage
+% \thispagestyle{empty}
+\mbox{}
+\newpage
+
+
+% final page
+\newpage
+\section*{Notes}
+\newpage
+% \thispagestyle{empty}
+\mbox{}
+\newpage
+% \thispagestyle{empty}
+\mbox{}
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\centering
+© Ted Frank 2020
 
 \end{document}

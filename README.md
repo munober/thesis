@@ -1,9 +1,10 @@
 ## Tiny Face: Extreme Edge Face Detection
 ### Teo Fratiloiu's Bachelor's Thesis
-[Preview current version](main.pdf)  
+[Preview print version](main.pdf) 
+[Preview digital version](digital_edition.pdf) 
 [Preview slides](thesis_pres/thesis_presentation.pdf)
 
-### Current Status
+### Current Status - SUBMITTED
 - [x] Abstract
 - [x] Declaration
 - [x] Chapter 1  
