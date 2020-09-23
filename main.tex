@@ -147,7 +147,9 @@ pdfauthor = {Teodor Fratiloiu}
 \pagenumbering{roman}
 \pagestyle{plain}
 \subfile{abstract}
-\afterpage{\blankpage}
+\newpage
+% \thispagestyle{empty}
+\mbox{}
 \tableofcontents
 
 \newpage
@@ -180,7 +182,7 @@ pdfauthor = {Teodor Fratiloiu}
 \pagenumbering{roman}
 \subfile{epilogue}
 \newpage
-\thispagestyle{empty}
+% \thispagestyle{empty}
 \mbox{}
 \newpage
 
