@@ -16,3 +16,8 @@
 - [x] Epilogue
 - [x] Cover
 - [x] References
+
+### Related Projects
+[Web Scraping Tool](https://github.com/munober/webscrapper)
+[Model Training & Inference](https://github.com/munober/tinyModels)
+[MCU Project](https://github.com/munober/STM3240G-EVAL-TensorFlow-TinyFace)
